@@ -24,6 +24,6 @@
    ```sudo apt install cppcheck``` \
    \
    Установив cppcheck, вы можете протестировать исходный код: \
-   ```cppcheck --enable=all --suppress=missingIncludeSystem src/soursefile_name.c``` \
+   ```cppcheck --std=c99 --enable=all --suppress=missingIncludeSystem src/soursefile_name.c``` \
    Также можно проверить сразу все файлы с исходным кодом в директории: \
-   ```cppcheck --enable=all --suppress=missingIncludeSystem src/```
+   ```cppcheck --std=c99 --enable=all --suppress=missingIncludeSystem src/```
