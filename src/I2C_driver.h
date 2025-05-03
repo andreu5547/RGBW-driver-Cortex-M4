@@ -77,17 +77,6 @@ typedef struct
 * I2CHW_ERR_HW - the bus was not initialized because of HW issues
 *
 */
-
-/**
-* @brief инициализирует шину I2C. Должен вызываться после I2CHW_Configure
-*
-* @param bus_num - номер шины I2C
-* @return hal_error_t - результат инициализации
-* I2CHW_SUCCESS - шина была успешно инициализирована
-* I2C HW_ERR_INVALID_PARAMS - указаны недопустимые параметры шины, которая не была настроена ранее.
-* I2C HW_ERR_HW - шина не была инициализирована из-за проблем с HW
-*
-*/
 i2chw_error_t I2CHW_Init(const i2chw_bus_t bus_num);
 
 /**
@@ -98,16 +87,6 @@ i2chw_error_t I2CHW_Init(const i2chw_bus_t bus_num);
 * @return i2chw_error_t - configuration result
 * I2CHW_SUCCESS - the bus was configured successfully
 * I2CHW_ERR_INVALID_PARAMS - invalid parameters are given
-*/
-
-/**
-* @brief Конфигурация шины I2C перед инициализацией
-*
-* @param bus_num - номер шины I2C
-* @param p_config - указатель на конфигурацию I2C
-* @return i2chw_error_t - результат настройки
-* I2CHW_SUCCESS - шина была успешно настроена
-* I2CHW_ERR_INVALID_PARAMS - указаны недопустимые параметры
 */
 i2chw_error_t I2CHW_Configure(const i2chw_bus_t bus_num,
 const i2chw_cfg_t* p_config);
@@ -124,20 +103,6 @@ const i2chw_cfg_t* p_config);
 * I2CHW_ERR_TIMEOUT - transmission was not finished because of execution timeout
 * I2CHW_ERR_NACK - the device did't set ACK bit
 * I2CHW_ERR_HW - the bus has hardware issues
-*/
-
-/**
-* @brief синхронно передает данные на устройство в master режиме
-*
-* @param p_dev - указатель на конфигурацию устройства I2C
-* @param p_tx_data - указатель на данные, которые должны быть переданы
-* @param tx_data_len - длина передаваемых данных
-* @return i2chw_error_t - результат передачи
-* I2CHW_SUCCESS - все данные переданы.
-* I2CHW_ERR_INVALID_PARAMS - указаны недопустимые параметры
-* I2CHW_ERR_TIMEOUT - передача не была завершена из-за тайм-аута выполнения
-* I2CHW_ERR_NACK - устройство не установило бит подтверждения
-* I2CHW_ERR_HW - у шины проблемы с оборудованием
 */
 i2chw_error_t I2CHW_WriteSync(const i2chw_dev_t* p_dev,
 const uint8_t* p_tx_data,
@@ -157,23 +122,6 @@ const uint16_t tx_data_len);
 * I2CHW_ERR_TIMEOUT - exchange was not finished because of execution timeout
 * I2CHW_ERR_NACK - the device did't set ACK bit
 * I2CHW_ERR_HW - the bus has hardware issues
-*
-*/
-
-/**
-* @brief Передает данные на устройство I2C, а затем синхронно принимает данные с устройства в master режиме
-*
-* @param p_dev - указатель на конфигурацию устройства I2C
-* @param p_tx_data - указатель на передаваемые данные
-* @param tx_data_len - длина передаваемых данных
-* @param p_rx_data - указатель на буфер для размещения полученных данных
-* @param rx_data_len - длина полученных данных
-* @return i2chw_error_t - результат обмена
-* I2CHW_SUCCESS - все данные переданы и получены
-* I2CHW_ERR_INVALID_PARAMS - указаны недопустимые параметры.
-* I2CHW_ERR_TIMEOUT - обмен не был завершен из-за истечения времени ожидания выполнения
-* I2CHW_ERR_NACK - устройство не установило бит подтверждения
-* I2CHW_ERR_HW - у шины проблемы с оборудованием
 *
 */
 i2chw_error_t I2CHW_WriteReadSync(const i2chw_dev_t* p_dev,
@@ -196,19 +144,6 @@ const uint16_t rx_data_len);
 * I2CHW_ERR_HW - the bus has hardware issues
 */
 
-/**
-* @brief синхронно получает данные от устройства в master режиме
-*
-* @param p_dev - указатель на конфигурацию устройства I2C
-* @param p_rx_data - указатель на буфер для размещения полученных данных
-* @param rx_data_len - длина полученных данных
-* @return i2chw_error_t - результат получения
-* I2CHW_SUCCESS - все данные получены.
-* I2CHW_ERR_INVALID_PARAMS - указаны недопустимые параметры
-* I2CHW_ERR_TIMEOUT - обмен не был завершен из-за тайм-аута выполнения
-* I2CHW_ERR_NACK - устройство не установило бит подтверждения
-* I2CHW_ERR_HW - у шины проблемы с оборудованием
-*/
 i2chw_error_t I2CHW_ReadSync(const i2chw_dev_t* p_dev,
 uint8_t* p_rx_data,
 const uint16_t rx_data_len);
